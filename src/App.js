@@ -41,39 +41,21 @@ class BooksApp extends React.Component {
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
-                    <div className="bookshelf-books">
-                      <ol className="books-grid">
-                  {
-                    this.state.books
-                        .filter(book => book.shelf === "currentlyReading")
-                        .map(book => (<BookList book={book} UpdateShelf={this.UpdateShelf} />)
-                    )}
-                      </ol>
-                    </div>
-                  </div>
+                    <BookList books={this.state.books.filter((book) => book.shelf === "currentlyReading")}
+                      UpdateShelf={this.UpdateShelf}
+                    />
+                </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
-                    <div className="bookshelf-books">
-                      <ol className="books-grid">
-                  {
-                    this.state.books
-                        .filter(book => book.shelf === "wantToRead")
-                        .map(book => (<BookList book={book} UpdateShelf={this.UpdateShelf} />)
-                    )}
-                      </ol>
-                    </div>
-                  </div>
+                    <BookList books={this.state.books.filter((book) => book.shelf === 'wantToRead')}
+                      UpdateShelf={this.UpdateShelf}
+                    />
+                </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
-                    <div className="bookshelf-books">
-                      <ol className="books-grid">
-                  {
-                    this.state.books
-                        .filter(book => book.shelf === "read")
-                        .map(book => (<BookList book={book} UpdateShelf={this.UpdateShelf} />)
-                    )}
-                      </ol>
-                  </div>
+                    <BookList books={this.state.books.filter((book) => book.shelf === 'read')}
+                      UpdateShelf={this.UpdateShelf}
+                    />
                 </div>
               </div>
             </div>
