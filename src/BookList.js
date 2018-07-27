@@ -7,46 +7,38 @@ class BookList extends Component {
 render() {
 
   return(
-<div className="bookshelf-books">
- <ol className="books-grid">
-  {this.props.books.map((book) => (
-        <li key={book.id} >
+        <li key={this.props.book.id} >
           <div className="book">
             <div className="book-top">
-              <div key={book.title} className="book-cover"
+              <div key={this.props.book.title} className="book-cover"
               style={{
                 width: 128,
                 height: 193,
                 //Set the book image
-                backgroundImage: `Url(${book.imageLinks.thumbnail})`
+                backgroundImage: `Url(${this.props.book.imageLinks.thumbnail})`
                 }}>
               </div>
                 <div className="book-shelf-changer">
                   <select
                     onChange = {(event) => this.props.UpdateShelf(
-                      book, event.target.value
+                      this.props.book, event.target.value
                     )}
                     >
                     <option value="move" disabled>Move to...</option>
+                    <option value="none">None</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none">None</option>
                   </select>
                 </div>
             </div>
               {/* set book title */}
-            <div className="book-title">{book.title}</div>
+            <div className="book-title">{this.props.book.title}</div>
               {/* set book author */}
-            <div className="book-authors">{book.authors}</div>
+            <div className="book-authors">{this.props.book.authors}</div>
           </div>
           </li>
-        )
       )}
-    </ol>
-  </div>
-   )
-  }
 }
 
 export default BookList
