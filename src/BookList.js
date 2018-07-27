@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 class BookList extends Component {
 
 //Create a component to delete the majority of spagetti code of App.js.
@@ -33,7 +34,7 @@ return(
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none">None</option>
+                    <option selected value="none">None</option>
                   </select>
                 </div>
             </div>
