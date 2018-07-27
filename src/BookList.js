@@ -6,7 +6,7 @@ class BookList extends Component {
 
 render() {
 
-  return(
+return(
 <div className="bookshelf-books">
  <ol className="books-grid">
   {this.props.books.map((book) => (
@@ -18,7 +18,8 @@ render() {
                 width: 128,
                 height: 193,
                 //Set the book image
-                backgroundImage: `Url(${book.imageLinks.thumbnail})`
+                backgroundImage: `url(${book.imageLinks ?
+                book.imageLinks.thumbnail : ''})`
                 }}>
               </div>
                 <div className="book-shelf-changer">
@@ -26,6 +27,7 @@ render() {
                     onChange = {(event) => this.props.UpdateShelf(
                       book, event.target.value
                     )}
+                    value={this.props.currentShelf}
                     >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
