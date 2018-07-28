@@ -7,6 +7,8 @@ class BookList extends Component {
 
 render() {
 
+const { currentShelf } = this.props
+
 return(
 <div className="bookshelf-books">
  <ol className="books-grid">
@@ -28,7 +30,7 @@ return(
                     onChange = {(event) => this.props.UpdateShelf(
                       book, event.target.value
                     )}
-                    value={this.props.currentShelf}
+                    value={currentShelf}
                     >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>

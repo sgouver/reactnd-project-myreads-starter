@@ -31,6 +31,10 @@ class Search extends Component {
 
   render() {
 
+    const { UpdateShelf } = this.props
+    const { query, BooksSearch } = this.state
+
+
     return(
         <div className="search-books">
           <div className="search-books-bar">
@@ -43,14 +47,14 @@ class Search extends Component {
               <input
                 type="text"
                 placeholder="Search by title or author"
-                value={this.state.query}
+                value={query}
                 onChange={event => this.updateQuery(event.target.value)}
               />
             </div>
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              {/* {
+              {/* cannot implement to sync books with searchBook lists --> {
                 this.state.BooksSearch.map(this.props.BookList => {
                   let shelf ='none';
                     book.id === searchBook.id ?
@@ -58,8 +62,8 @@ class Search extends Component {
                 })
               }*/}
               <BookList
-                books={this.state.BooksSearch}
-                UpdateShelf={this.props.UpdateShelf}
+                books={BooksSearch}
+                UpdateShelf={UpdateShelf}
               />
             </ol>
           </div>

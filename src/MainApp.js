@@ -5,6 +5,9 @@ import BookList from './BookList';
 
 class MainApp extends React.Component {
   render() {
+
+  const { books, UpdateShelf } = this.props
+  
     return(
       <div className="list-books">
         <div className="list-books-title">
@@ -14,25 +17,25 @@ class MainApp extends React.Component {
           <div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookList books={this.props.books
+                <BookList books={books
                     .filter((book) => book.shelf === "currentlyReading")}
-                    UpdateShelf={this.props.UpdateShelf}
+                    UpdateShelf={UpdateShelf}
                   currentShelf='currentlyReading'
                 />
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
-                <BookList books={this.props.books
+                <BookList books={books
                     .filter((book) => book.shelf === 'wantToRead')}
-                    UpdateShelf={this.props.UpdateShelf}
+                    UpdateShelf={UpdateShelf}
                   currentShelf='wantToRead'
                 />
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-                <BookList books={this.props.books
+                <BookList books={books
                     .filter((book) => book.shelf === 'read')}
-                  UpdateShelf={this.props.UpdateShelf}
+                  UpdateShelf={UpdateShelf}
                   currentShelf='read'
                 />
             </div>
