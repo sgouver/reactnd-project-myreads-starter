@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import BookList from './BookList';
 
 
-const MainApp = (props) => {
+class MainApp extends React.Component {
+  render() {
 
-  const { books, UpdateShelf } = props
-
+  const { books, UpdateShelf } = this.props
+  
     return(
       <div className="list-books">
         <div className="list-books-title">
@@ -16,21 +17,27 @@ const MainApp = (props) => {
           <div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
-              {books.filter(book => book.shelf === "currentlyReading")
-                    .map(book => <BookList />)
-              }
+                <BookList books={books
+                    .filter((book) => book.shelf === "currentlyReading")}
+                    UpdateShelf={UpdateShelf}
+                  currentShelf='currentlyReading'
+                />
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
-                {books.filter(book => book.shelf === "wantToRead")
-                      .map(book => <BookList />)
-                }
+                <BookList books={books
+                    .filter((book) => book.shelf === 'wantToRead')}
+                    UpdateShelf={UpdateShelf}
+                  currentShelf='wantToRead'
+                />
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-                {books.filter(book => book.shelf === "read")
-                      .map(book => <BookList />)
-                }
+                <BookList books={books
+                    .filter((book) => book.shelf === 'read')}
+                  UpdateShelf={UpdateShelf}
+                  currentShelf='read'
+                />
             </div>
           </div>
         </div>
@@ -42,5 +49,6 @@ const MainApp = (props) => {
       </div>
     )
   }
+}
 
 export default MainApp
