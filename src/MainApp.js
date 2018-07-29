@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import BookList from './BookList';
 
+//use a stateless component because there is no change of state
+const MainApp = (props) => {
 
-class MainApp extends React.Component {
-  render() {
+//set some variables to avoid repetitive writing
+  const { UpdateShelf, books } = props
 
-  const { books, UpdateShelf } = this.props
-  
     return(
       <div className="list-books">
         <div className="list-books-title">
@@ -17,27 +17,60 @@ class MainApp extends React.Component {
           <div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookList books={books
-                    .filter((book) => book.shelf === "currentlyReading")}
-                    UpdateShelf={UpdateShelf}
-                  currentShelf='currentlyReading'
-                />
+                <div className="bookshelf-books">
+                 <ol className="books-grid">
+                   {/*loop to filter the books for each category
+                   loop to create an array based on the filtered array
+                   set attributes for each item of the final array*/}
+                  { books.filter(book =>
+                    book.shelf === 'currentlyReading').map(book => (
+                      <li key={book.id}>
+                        <BookList
+                          book={book}
+                          UpdateShelf={UpdateShelf}
+                          currentShelf='currentlyReading' />
+                      </li>
+                    ))}
+                </ol>
+              </div>
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
-                <BookList books={books
-                    .filter((book) => book.shelf === 'wantToRead')}
-                    UpdateShelf={UpdateShelf}
-                  currentShelf='wantToRead'
-                />
+                <div className="bookshelf-books">
+                 <ol className="books-grid">
+                   {/*loop to filter the books for each category
+                   loop to create an array based on the filtered array
+                   set attributes for each item of the final array*/}
+                  { books.filter(book =>
+                    book.shelf === 'wantToRead').map(book => (
+                      <li key={book.id}>
+                        <BookList
+                          book={book}
+                          UpdateShelf={UpdateShelf}
+                          currentShelf='wantToRead' />
+                      </li>
+                    ))}
+                </ol>
+              </div>
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-                <BookList books={books
-                    .filter((book) => book.shelf === 'read')}
-                  UpdateShelf={UpdateShelf}
-                  currentShelf='read'
-                />
+                <div className="bookshelf-books">
+                 <ol className="books-grid">
+                   {/*loop to filter the books for each category
+                   loop to create an array based on the filtered array
+                   set attributes for each item of the final array*/}
+                  { books.filter(book =>
+                    book.shelf === 'read').map(book => (
+                      <li key={book.id}>
+                        <BookList
+                          book={book}
+                          UpdateShelf={UpdateShelf}
+                          currentShelf='read' />
+                      </li>
+                    ))}
+                </ol>
+              </div>
             </div>
           </div>
         </div>
@@ -48,7 +81,6 @@ class MainApp extends React.Component {
         </div>
       </div>
     )
-  }
 }
 
 export default MainApp

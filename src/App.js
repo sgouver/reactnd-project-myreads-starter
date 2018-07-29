@@ -12,22 +12,26 @@ class BooksApp extends React.Component {
     books : [],
   }
 
+
+// Use the prodifined update() function from BooksAPI to initite a refresh
   UpdateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf);
 
+//After the update recall all the BooksAPI array
     BooksAPI.getAll().then((books) => {
       this.setState({books})
     })
   }
 
+//The initial mount of the array
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({books})
     })
   }
 
+//rendering the two children of the App.js
   render() {
-    console.log(this.state.books)
   return (
       <div className="app">
           <Route exact path='/' render={() => (
