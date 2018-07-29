@@ -1,18 +1,13 @@
-import React, { Component } from 'react'
-
+import React, {Component} from 'react'
 
 class BookList extends Component {
 
 //Create a component to delete the majority of spagetti code of App.js.
-
-render() {
-
-const { currentShelf } = this.props
+render () {
 
 return(
 <div className="bookshelf-books">
  <ol className="books-grid">
-  {this.props.books.map((book) => (
         <li key={book.id} >
           <div className="book">
             <div className="book-top">
@@ -27,7 +22,7 @@ return(
               </div>
                 <div className="book-shelf-changer">
                   <select
-                    onChange = {(event) => this.props.UpdateShelf(
+                    onChange = {(event) => props.UpdateShelf(
                       book, event.target.value
                     )}
                     value={currentShelf}
@@ -46,12 +41,9 @@ return(
             <div className="book-authors">{book.authors}</div>
           </div>
           </li>
-        )
-      )}
     </ol>
   </div>
-   )
-  }
-}
+
+)}}
 
 export default BookList

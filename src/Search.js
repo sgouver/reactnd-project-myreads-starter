@@ -8,7 +8,7 @@ class Search extends Component {
   state = {
       query: "",
       BooksSearch: []
-    }
+  }
 
   updateQuery = (query) => {
     this.setState({ query })
