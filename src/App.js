@@ -13,29 +13,11 @@ class BooksApp extends React.Component {
   }
 
   UpdateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf);
 
-    let match = false
-    for (let b of this.state.books) {
-      if (b.id === book.id) {
-        match = true
-      }
-    }
-    BooksAPI.update(book, shelf).then(() => {
-      if (match === true) {
-          this.setState(state => ({
-          books: state.books.map(b => {
-            b.shelf = shelf
-          })
-        }))
-      } else {
-        this.setState(state => ({
-          books: state.books.concat([book])
-        }))
-      }
-
-    }).then(BooksAPI.getAll().then((books) => {
-          this.setState({books})
-    }))
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
   }
 
   componentDidMount() {
@@ -51,12 +33,13 @@ class BooksApp extends React.Component {
           <Route exact path='/' render={() => (
             <MainApp
               books={this.state.books}
+              UpdateShelf={this.UpdateShelf}
             />
           )}/>
           <Route path='/search' render={() => (
             <Search
-              changeshelf={this.UpdateShelf}
-              booksShelfs={this.state.books}
+              UpdateShelf={this.UpdateShelf}
+              books={this.state.books}
             />
           )}/>
 

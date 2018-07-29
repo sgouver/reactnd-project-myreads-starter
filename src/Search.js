@@ -11,47 +11,29 @@ class Search extends Component {
     }
 
   updateQuery = (query) => {
-    if(query) {
-      BooksAPI.search(query).then((books) => {
-        if('error' in books) {
-          this.setState ({
-            BooksSearch: [],
-            query: query
-         })
+    this.setState({ query })
+    this.getBooks(query)
+  }
+
+  getBooks = (query) => {
+  if(query) {
+      BooksAPI.search(query).then((BooksSearch) => {
+        if(BooksSearch.error){
+          this.setState({BooksSearch: []})
+        } else {
+          this.setState({BooksSearch})
         }
-      else{ //got results
-        books.map(b => {
-          for (let sBooks of this.props.booksShelfs) {
-            if (sBooks.id === b.id) {
-              b['shelf'] = 'none'
-              return b
-            }
-          }
-          b['shelf'] = 'none'
-          return b
-        })
-        this.setState ({
-          query: query,
-          BooksSearch: books
-        })
-      }
-    })
+      })
+    }else{
+      this.setState({BooksSearch: []});
+    }
   }
-  else {
-    this.setState ({
-      query: '',
-      BooksSearch: []
-    })
-  }
-  return
-}
-
-
 
   render() {
 
-    const { changeshelf } = this.props
+    const { UpdateShelf } = this.props
     const { query, BooksSearch } = this.state
+
 
     return(
         <div className="search-books">
@@ -65,20 +47,24 @@ class Search extends Component {
               <input
                 type="text"
                 placeholder="Search by title or author"
+                value={query}
                 onChange={event => this.updateQuery(event.target.value)}
               />
             </div>
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-                {
-                  BooksSearch.map(book => {
-                      <BookList
-                          booksShelfs={book}
-                          changeshelf={changeshelf}
-                      />
-                    })
-                }
+              {/* cannot implement to sync books with searchBook lists --> {
+                this.state.BooksSearch.map(this.props.BookList => {
+                  let shelf ='none';
+                    book.id === searchBook.id ?
+                    shelf = book.shelf : ''
+                })
+              }*/}
+              <BookList
+                books={BooksSearch}
+                UpdateShelf={UpdateShelf}
+              />
             </ol>
           </div>
         </div>
