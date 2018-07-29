@@ -7,50 +7,43 @@ class BookList extends Component {
 
 render() {
 
-const { currentShelf } = this.props
+const { bookShow, changeshelf } = this.props
 
 return(
-<div className="bookshelf-books">
- <ol className="books-grid">
-  {this.props.books.map((book) => (
-        <li key={book.id} >
+        <li>
           <div className="book">
             <div className="book-top">
-              <div key={book.title} className="book-cover"
+              <div key={bookShow.title} className="book-cover"
               style={{
                 width: 128,
                 height: 193,
                 //Set the book image
-                backgroundImage: `url(${book.imageLinks ?
-                book.imageLinks.thumbnail : ''})`
+                backgroundImage: `url(${bookShow.imageLinks ?
+                bookShow.imageLinks.thumbnail : ''})`
                 }}>
               </div>
                 <div className="book-shelf-changer">
                   <select
-                    onChange = {(event) => this.props.UpdateShelf(
-                      book, event.target.value
+                    onChange = {(event) => changeshelf(
+                      booksShelfs, event.target.value
                     )}
-                    value={currentShelf}
+                    defaultValue={bookShow.shelf}
                     >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option selected value="none">None</option>
+                    <option value="none">None</option>
                   </select>
                 </div>
             </div>
               {/* set book title */}
-            <div className="book-title">{book.title}</div>
+            <div className="book-title">{bookShow.title}</div>
               {/* set book author */}
-            <div className="book-authors">{book.authors}</div>
+            <div className="book-authors">{bookShow.authors}</div>
           </div>
           </li>
         )
-      )}
-    </ol>
-  </div>
-   )
   }
 }
 
